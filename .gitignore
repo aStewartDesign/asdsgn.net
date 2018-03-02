@@ -63,3 +63,6 @@ app/dest/*
 renderLambda/dest/*
 renderLambda.zip
 
+# OSX
+**/.DS_STORE
+
