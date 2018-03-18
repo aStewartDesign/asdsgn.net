@@ -3,12 +3,14 @@ import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Hello from './Components/Hello.jsx';
 import index from './index.hbs';
+import _ from 'lodash';
 
-export default (event, context, callback) => {
+export const render = (event, context, callback) => {
     const ct = hb.compile(index);
+    const params = event.queryStringParameters || {};
     const state = {
-        name: 'World',
-        adj: 'beautiful'
+        name: params.name || 'World',
+        adj: params.adj || 'beautiful'
     };
     const data = {
         data: JSON.stringify(state),
