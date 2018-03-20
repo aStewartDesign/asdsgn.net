@@ -109,14 +109,14 @@ functions:
 #       Value: "Some output value"
 
 custom:
-  webpack:
-    webpackConfig: 'handler.webpack.config.js'
   assets:
     targets:
       - bucket: asdsgn.net
         files:
-          - source: ./.webpack/
-            globs: '*.js'
+          - source: ../client/.webpack/
+            globs: 
+              - '**/*.js'
+              - '**/*.css'
 
 #       - S3 Buckets here...
 #       - bucket: my-bucket

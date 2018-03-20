@@ -18,7 +18,7 @@ export default class Hello extends React.Component {
         const message = this.state.isReactive ? 'Yes! I am reactive!!' : 'Am I reactive??';
         return (
             <div>
-                <h1>(a)sdsgn<span style={{color: '#999'}}>.net</span></h1>
+                <h1>(as)dsgn<span style={{color: '#999'}}>.net</span></h1>
                 <p>Hello {this.props.name}! My what a {this.props.adj} day.</p>
                 <p>My name is Andrew Stewart and this is my playground on the internet. This project is being built with React &amp; AWS.</p>
                 <hr />

@@ -1,6 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Hello from './Components/Hello.jsx';
+import Hello from './js/Components/Hello.jsx';
+
+import './css/app.css';
 
 const state = window.INIT_STATE || {};
 

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config client.webpack.config.js && node client-local.js",
-    "deploy": "npm run build && aws s3 cp ./.webpack/client.js s3://asdsgn.net/client.js && sls deploy"
+    "build": "webpack --config ./client/webpack.config.js",
+    "start": "npm run build && node ./client/dev-server.js",
+    "deploy": "npm run build && aws s3 cp --recursive ./client/public s3://asdsgn.net && cd lambda && sls deploy && cd .."
   },
   "author": "",
   "license": "ISC",
@@ -21,10 +22,19 @@
     "babel-loader": "^7.1.3",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "express": "^4.16.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
     "handlebars": "^4.0.11",
     "html-loader": "^0.5.5",
+    "postcss": "^6.0.20",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^11.1.0",
+    "postcss-loader": "^2.1.2",
     "serverless-s3-deploy": "^0.5.0",
     "serverless-webpack": "^5.1.0",
+    "url-loader": "^1.0.1",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
   }
