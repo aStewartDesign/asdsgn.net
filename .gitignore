@@ -6,7 +6,8 @@ jspm_packages
 .DS_Store
 **/.DS_Store
 
-lambda/.serverless
+api/.serverless
+render/.serverless
 .vscode
 
 # build files
@@ -14,4 +15,4 @@ client/public/*.html
 client/public/*.css
 client/public/*.js
 client/.webpack
-lambda/.webpack
+render/.webpack

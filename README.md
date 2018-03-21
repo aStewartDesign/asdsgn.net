@@ -13,4 +13,4 @@ This repo houses the code behind [www.asdsgn.net](https://www.asdsgn.net).
   - Redux
   - React-router
 * Serverless
-* 
+* DynamoDB backed API
