@@ -97,6 +97,31 @@ function buildUserObject(cognitoUser) {
     });
 }
 
+export function verifyUserAccount({email, pin}) {
+    return new Promise((res, rej) => {
+        const cognitoUser = new CognitoUser({
+            Username: email,
+            Pool: userPool
+        });
+        cognitoUser.confirmRegistration(pin, true, (err, result) => {
+            if (err) {
+                console.log(err);
+                rej(err);
+                return;
+            }
+
+            if (result === 'SUCCESS') {
+                console.log('Account verified!');
+                cognitoUser.signOut();
+                res();
+            }
+            else {
+                rej('Could not verify account.');
+            }
+        });
+    });
+}
+
 export function forgotPassword(email) {
     return new Promise((res, rej) => {
         const cognitoUser = new CognitoUser({
@@ -118,5 +143,30 @@ export function forgotPassword(email) {
                 });
             }
         });
+    });
+}
+
+export function resetVerificationPIN(email) {
+    return new Promise((res, rej) => {
+        const cognitoUser = new CognitoUser({
+            Username: email,
+            Pool: userPool
+        });
+        cognitoUser.resendConfirmationCode((err, result) => {
+            if (err) {
+                console.log(err);
+                rej(err);
+            }
+            else {
+                res();
+            }
+        });
+    });
+}
+
+export function signOutUser() {
+    return new Promise((res, rej) => {
+        const cognitoUser = userPool.getCurrentUser();
+        cognitoUser.signOut();
     });
 }
