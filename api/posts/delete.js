@@ -7,6 +7,8 @@ const baseResponse = require('../base-response.js');
 
 module.exports = (event, ctx, cb) => {
     const response = _.assign({}, baseResponse);
+    response.headers['Access-Control-Allow-Origin'] = 'https://www.asdsgn.net';
+    response.headers['Vary'] = 'Origin';
     const body = {
         success: true
     };

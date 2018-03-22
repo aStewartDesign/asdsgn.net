@@ -2,8 +2,11 @@ frameworkVersion: "<=1.26.1"
 plugins:
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-webpack
 
 custom:
+  # webpack:
+  #   includeModules: true
   dynamodb:
     start:
       port: 8001
@@ -32,29 +35,58 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_POSTS_TABLE}"
 
 functions:
+  auth:
+    handler: auth.authorize
+
   posts_create:
-    handler: posts/handler.create
+    handler: posts.create
     events:
       - http:
           path: posts
           method: post
-          cors: true
+          authorizer: auth
+          cors:
+            origins:
+              - 'https://www.asdsgn.net'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+          
   
   posts_list:
-    handler: posts/handler.list
+    handler: posts.list
     events:
       - http:
           path: posts
           method: get
-          cors: true
+          cors:
+            origins:
+              - 'https://www.asdsgn.net'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
   
   posts_get:
-    handler: posts/handler.get
+    handler: posts.get
     events:
       - http:
           path: posts/{id}
           method: get
-          cors: true
+          cors:
+            origins:
+              - 'https://www.asdsgn.net'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
   
   # posts_update:
   #   handler: posts/handler.update
@@ -62,15 +94,33 @@ functions:
   #     - http:
   #         path: posts/{id}
   #         method: put
-  #         cors: true
+  #         authorizer: auth
+  #         cors:
+  #           origins:
+  #             - 'https://www.asdsgn.net'
+  #           headers:
+  #             - Content-Type
+  #             - X-Amz-Date
+  #             - Authorization
+  #             - X-Api-Key
+  #             - X-Amz-Security-Token
   
   posts_delete:
-    handler: posts/handler.delete
+    handler: posts.delete
     events:
       - http:
           path: posts/{id}
           method: delete
-          cors: true
+          authorizer: auth
+          cors:
+            origins:
+              - 'https://www.asdsgn.net'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
 
 resources:
   Resources:

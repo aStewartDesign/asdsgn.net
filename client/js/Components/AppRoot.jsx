@@ -18,6 +18,9 @@ export default class AppRoot extends React.Component {
                 <main>
                     {renderRoutes(this.props.route.routes)}
                 </main>
+                <footer>
+                    <Link to="/login">loggins</Link>
+                </footer>
             </div>
         );
     }
