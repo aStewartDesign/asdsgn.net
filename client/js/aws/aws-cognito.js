@@ -1,5 +1,6 @@
 import {CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails, CognitoIdentityCredentials, WebIdentityCredentials} from 'amazon-cognito-identity-js';
 import {userPool, USERPOOL_ID, IDENTITY_POOL_ID} from './aws-profile.js';
+import _ from 'lodash';
 import uuid from 'uuid';
 import 'amazon-cognito-js';
 
@@ -35,15 +36,50 @@ export function signInUser({email, password}) {
             Pool: userPool
         });
         authenticateUser(cognitoUser, authDetails)
-            .then(() => {
-                return buildUserObject(cognitoUser);
-            })
-            .then((userProfileObj) => {
-                res(userProfileObj);
+            .then((resp) => {
+                const userProfile = buildUserObject(cognitoUser);
+                res(_.assign(userProfile, {
+                    type: resp.type
+                }));;
             })
             .catch((err) => {
                 rej(err);
             });
+    });
+}
+
+export function completeNewPasswordChallenge({cognitoUser, password}) {
+    return new Promise((res, rej) => {
+        cognitoUser.completeNewPasswordChallenge(password, null, {
+            onSuccess: (resp) => {
+                localStorage.setItem('user_token', resp.accessToken.jwtToken);
+                const Logins = {
+                    [USERPOOL_ID]: resp.getIdToken().getJwtToken()
+                };
+                AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                    Logins
+                });
+                AWS.config.credentials.refresh(() => {
+                    console.log('AWS Credentials refreshed!');
+                });
+                res(_.assign({
+                    type: 'success'
+                }, buildUserObject(cognitoUser)));
+            },
+            onFailure: (err) => {
+                console.log(err);
+                rej(err);
+            },
+            newPasswordRequired: (userAttributes, requiredAttributes) => {
+                console.log('User needs a new password.');
+                res({
+                    type: 'new-password',
+                    requiredAttributes,
+                    userAttributes,
+                    cognitoUser
+                });
+            }
+        });
     });
 }
 
@@ -61,14 +97,20 @@ function authenticateUser(cognitoUser, authDetails) {
                 AWS.config.credentials.refresh(() => {
                     console.log('AWS Credentials refreshed!');
                 });
-                res();
+                res({
+                    type: 'success'
+                });
             },
             onFailure: (err) => {
                 console.log(err);
                 rej(err);
             },
-            newPasswordRequired: (attr, requiredAttr) => {
+            newPasswordRequired: (userAttributes, requiredAttributes) => {
                 console.log('User needs a new password.');
+                rej({
+                    type: 'new-password',
+                    cognitoUser
+                });
             }
         });
     });
