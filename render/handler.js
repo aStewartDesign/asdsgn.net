@@ -57,8 +57,14 @@ export const render = (event, context, callback) => {
     const ct = hb.compile(index);
     const params = event.queryStringParameters || {};
     const state = {
-        name: params.name || 'World',
-        adj: params.adj || 'beautiful'
+        app: {
+            name: params.name || 'World',
+            adj: params.adj || 'beautiful'
+        },
+        blog: {
+            posts: [],
+            isLoading: false
+        }
     };
     const history = createMemoryHistory({
         initialEntries: [parsePath(event.path)],

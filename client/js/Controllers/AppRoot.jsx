@@ -27,6 +27,6 @@ class AppRoot extends React.Component {
 
 export default connect(
     (state, ownProps) => {
-        return _.assign({}, state, ownProps);
+        return _.assign({}, state.app, ownProps);
     }
 )(AppRoot);
