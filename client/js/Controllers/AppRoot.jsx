@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import { renderRoutes } from 'react-router-config';
+import {connect} from 'react-redux';
+import _ from 'lodash';
 
-export default class AppRoot extends React.Component {
+class AppRoot extends React.Component {
 
     render() {
         return (
@@ -22,3 +24,9 @@ export default class AppRoot extends React.Component {
         );
     }
 }
+
+export default connect(
+    (state, ownProps) => {
+        return _.assign({}, state.app, ownProps);
+    }
+)(AppRoot);

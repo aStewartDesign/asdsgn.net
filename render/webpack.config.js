@@ -1,10 +1,9 @@
 const path = require('path');
+const slsw = require('serverless-webpack');
 
 const config = {
   target: 'node',
-  entry: {
-      handler: './handler.js'
-  },
+  entry:  slsw.lib.entries,
   output: {
     path: path.resolve(__dirname, '.webpack'),
     filename: '[name].js',
@@ -15,6 +14,9 @@ const config = {
       { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' },
       { test: /\.hbs/, use: 'html-loader' }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   },
   devtool: 'eval-source-map'
 };

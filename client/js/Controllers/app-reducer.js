@@ -16,8 +16,10 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export const toggleReactive = () => {
-  return {
-      type: TOGGLE_REACTIVE
-  };
+export const actions = {
+  toggleReactive() {
+    return {
+        type: TOGGLE_REACTIVE
+    };
+  }
 };
