@@ -31,7 +31,7 @@ export default class Login extends React.Component {
                         </div>
                     )
                 }
-                <div style={{textAlign: 'left', maxWidth: '500px;', margin: '0 auto'}}>
+                <form style={{textAlign: 'left', maxWidth: '500px;', margin: '0 auto'}}>
                     {
                         !isNewPassword && (
                             <div>
@@ -52,14 +52,17 @@ export default class Login extends React.Component {
                             </div>
                     }
                     <div>
-                        <button onClick={(
-                            isNewPassword
-                                ? this.handleNewPasswordLogin
-                                : this.handleLogin
-                        )}>Go!</button>
+                        <button
+                            type="button"
+                            onClick={(
+                                isNewPassword
+                                    ? this.handleNewPasswordLogin
+                                    : this.handleLogin
+                            )}>
+                            Go!</button>
                         <Link to="/password-reset">reset password</Link>
                     </div>
-                </div>
+                </form>
             </div>
         );
     }
@@ -76,7 +79,8 @@ export default class Login extends React.Component {
         this.setState({newPassword: e.target.value});
     }
 
-    handleLogin() {
+    handleLogin(e) {
+        e.preventDefault();
         signInUser({
             email: this.state.email,
             password: this.state.password

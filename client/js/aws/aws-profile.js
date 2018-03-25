@@ -1,5 +1,6 @@
 import {CognitoUserPool} from 'amazon-cognito-identity-js';
 import 'amazon-cognito-js';
+import AWS from 'aws-sdk';
 
 const REGION = 'us-west-2';
 const USER_POOL_ID = 'us-west-2_jWDo5dbxA';

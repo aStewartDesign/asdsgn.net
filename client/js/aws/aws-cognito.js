@@ -3,6 +3,7 @@ import {userPool, USERPOOL_ID, IDENTITY_POOL_ID} from './aws-profile.js';
 import _ from 'lodash';
 import uuid from 'uuid';
 import 'amazon-cognito-js';
+import AWS from 'aws-sdk';
 
 const landlordAttrs = ['email', 'id'];
 // const landlordAttrs = ['email', 'customFieldName', 'id'];

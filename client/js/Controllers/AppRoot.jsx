@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import { renderRoutes } from 'react-router-config';
+import {connect} from 'react-redux';
+import _ from 'lodash';
 
-export default class AppRoot extends React.Component {
+class AppRoot extends React.Component {
 
     render() {
         return (
@@ -18,10 +20,13 @@ export default class AppRoot extends React.Component {
                 <main>
                     {renderRoutes(this.props.route.routes)}
                 </main>
-                <footer>
-                    <Link to="/login">loggins</Link>
-                </footer>
             </div>
         );
     }
 }
+
+export default connect(
+    (state, ownProps) => {
+        return _.assign({}, state, ownProps);
+    }
+)(AppRoot);

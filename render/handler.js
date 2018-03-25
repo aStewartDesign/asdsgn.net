@@ -1,21 +1,52 @@
 import hb from 'handlebars';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {renderToString} from 'react-dom/server';
 
-import {StaticRouter} from 'react-router-dom';
+// import {StaticRouter} from 'react-router-dom';
 import {matchRoutes, renderRoutes} from 'react-router-config';
+import {ConnectedRouter} from 'react-router-redux';
+import {Router} from 'react-router-dom';
+import {createMemoryHistory, parsePath} from 'history';
 
-import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
 import routes from '../client/js/routes.js';
-import reducers from '../client/js/reducers/app.js';
+import {createStore} from '../client/js/reducers.js';
 import index from '../client/index.hbs';
 
-const store = createStore(reducers, applyMiddleware(thunk));
+class StaticReduxRouter extends React.Component {
+
+    getChildContext() {
+        return {
+            router: {
+                staticContext: this.props.context
+            }
+        };
+    }
+
+    render() {
+        return this.props.children;
+    }
+}
+
+StaticReduxRouter.propTypes = {
+    context: PropTypes.object.isRequired
+};
+StaticReduxRouter.childContextTypes = {
+    router: PropTypes.object.isRequired
+};
 
 export const render = (event, context, callback) => {
+
+    global.localStorage = {
+        getItem() { return null; },
+        setItem() { },
+        deleteItem() { }
+    };
+    global.window = {localStorage: global.localStorage};
+
     const response = {
         statusCode: 200,
         body: '',
@@ -29,14 +60,21 @@ export const render = (event, context, callback) => {
         name: params.name || 'World',
         adj: params.adj || 'beautiful'
     };
+    const history = createMemoryHistory({
+        initialEntries: [parsePath(event.path)],
+        initialIndex: 0
+    });
+    const store = createStore(state, history);
     const routerContext = {};
     const data = {
         data: JSON.stringify(state),
         content: renderToString(
             <Provider store={store}>
-                <StaticRouter location={event.path} context={routerContext}>
-                    {renderRoutes(routes)}
-                </StaticRouter>
+                <StaticReduxRouter context={routerContext}>
+                    <ConnectedRouter history={history}>
+                        {renderRoutes(routes)}
+                    </ConnectedRouter>
+                </StaticReduxRouter>
             </Provider>
         ),
         title: 'Hello world!',

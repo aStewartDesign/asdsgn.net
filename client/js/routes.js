@@ -1,10 +1,10 @@
-import AppRoot from './Components/AppRoot.jsx';
-import Home from './Components/Home.jsx';
-import Projects from './Components/Projects.jsx';
-import Blog from './Components/Blog.jsx';
-import Login from './Components/Login.jsx';
-import ResetPassword from './Components/ResetPassword.jsx';
-import NotFound from './Components/NotFound.jsx';
+import AppRoot from './Controllers/AppRoot.jsx';
+import Home from './Controllers/Home.jsx';
+import Projects from './Controllers/Projects.jsx';
+import Blog from './Controllers/Blog.jsx';
+import Login from './Controllers/Login.jsx';
+import ResetPassword from './Controllers/ResetPassword.jsx';
+import NotFound from './Controllers/NotFound.jsx';
 
 const routes = [
     {
