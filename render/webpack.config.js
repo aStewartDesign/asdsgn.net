@@ -18,6 +18,9 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  externals: [
+    'aws-sdk'
+  ],
   devtool: 'eval-source-map'
 };
 

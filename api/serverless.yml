@@ -50,10 +50,7 @@ functions:
               - 'https://www.asdsgn.net'
             headers:
               - Content-Type
-              - X-Amz-Date
               - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
           
   
   posts_list:
@@ -67,10 +64,6 @@ functions:
               - 'https://www.asdsgn.net'
             headers:
               - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
   
   posts_get:
     handler: posts.get
@@ -83,10 +76,6 @@ functions:
               - 'https://www.asdsgn.net'
             headers:
               - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
   
   # posts_update:
   #   handler: posts/handler.update

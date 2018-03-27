@@ -32,6 +32,9 @@ const config = {
   plugins: [
     extractStyles,
   ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   devtool: 'eval-source-map'
 };
 
