@@ -27,7 +27,7 @@ export default class ResetPassword extends React.Component {
         const {email, password, confirm_password, pin, cognitoUserPackage, errorMessage, isLoading} = this.state;
 
         return (
-            <div>
+            <div className="container">
                 <h2>Reset Password</h2>
                 <form style={{textAlign: 'left'}}>
                     {
@@ -69,15 +69,15 @@ export default class ResetPassword extends React.Component {
                                 </div>
                             )
                     }
+                    {
+                        errorMessage && (
+                            <div>
+                                <h3>Something's wrong:</h3>
+                                {errorMessage}
+                            </div>
+                        )
+                    }
                 </form>
-                {
-                    errorMessage && (
-                        <div>
-                            <h3>Something's wrong:</h3>
-                            {errorMessage}
-                        </div>
-                    )
-                }
             </div>
         );
     }

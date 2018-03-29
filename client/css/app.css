@@ -28,6 +28,23 @@ h4 {font-size: 1.414em;}
 
 small, .font_small {font-size: 0.707em;}
 
+.u-font-size__small {
+    font-size: 0.707em;
+}
+
+.u-color__secondary {
+    color: #999;
+}
+
+
+.c-list {
+    list-style: disc;
+}
+
+.c-list__item {
+    margin: 0 0 0.707em 0;
+}
+
 /* /type-scale.com code */
 
 .container {
@@ -35,18 +52,25 @@ small, .font_small {font-size: 0.707em;}
     margin: 0 auto;
 }
 
-.header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+/* .header { } */
+
+.header__title {
+    font-size: 2.827em;
+    margin-top: 1.1em;
+    text-align: right;
+}
+
+.header__sub-title {
+    text-align: right;
 }
 
 .nav {
     display: flex;
-    justify-content: flex-end;
 }
 
 .nav__item {
-    padding: 8px;
+    padding: 16px 8px;
+    margin: 0 8px;
 }
 
 

@@ -11,8 +11,8 @@ class AppRoot extends React.Component {
             <div>
                 <header className="header container">
                     <div>
-                        <h1>(as)dsgn<span style={{color: '#999'}}>.net</span></h1>
-                        <p>Hello {this.props.name}! My what a {this.props.adj} day.</p>
+                        <h1 className="header__title">(as)dsgn<span className="u-color__secondary">.net</span></h1>
+                        <p className="header__sub-title">Hello {this.props.name}!<br/>My what a {this.props.adj} day.</p>
                     </div>
                     <nav>
                         <ul className="nav">
@@ -29,7 +29,7 @@ class AppRoot extends React.Component {
                     </nav>
                 </header>
                 <hr />
-                <main className="container">
+                <main>
                     {renderRoutes(this.props.route.routes)}
                 </main>
             </div>

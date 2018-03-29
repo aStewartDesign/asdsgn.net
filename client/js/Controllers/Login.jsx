@@ -22,15 +22,17 @@ export default class Login extends React.Component {
     render() {
         const {email, password, newPassword, isNewPassword} = this.state;
         return (
-            <div>
-                <h2>Admin Login</h2>
-                {
-                    isNewPassword && (
-                        <div>
-                            Okay, I get it. You're special and need a new password. Go ahead...
-                        </div>
-                    )
-                }
+            <div className="container">
+                <div>
+                    <h2>Admin Login</h2>
+                    {
+                        isNewPassword && (
+                            <div>
+                                Okay, I get it. You're special and need a new password. Go ahead...
+                            </div>
+                        )
+                    }
+                </div>
                 <form style={{textAlign: 'left', maxWidth: '500px;', margin: '0 auto'}}>
                     {
                         !isNewPassword && (
