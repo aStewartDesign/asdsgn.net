@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "amazon-cognito-identity-js": "^2.0.2",
+    "amazon-cognito-identity-js": "^3.0.1",
     "amazon-cognito-js": "^1.1.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.5",
